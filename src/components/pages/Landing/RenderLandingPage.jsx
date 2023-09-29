@@ -33,14 +33,18 @@ function RenderLandingPage(props) {
 
       {/* Graphs Section: Add code here for the graphs section for your first ticket */}
       <div className="graphs-section">
-        <img src={GrantRatesByOfficeImg} />
-        <img src={GrantRatesByNationalityImg} />
-        <img src={GrantRatesOverTimeImg} />
-      </div>
-      <div className="graphs-section-text">
-        <p>Search Grant Rates By Office</p>
-        <p>Search Grant Rates By Nationality</p>
-        <p>Search Grant Rates Over Time</p>
+        <div className="graphs-wrapper">
+          <img src={GrantRatesByOfficeImg} />
+          <div className="caption">Search Grant Rates By Office</div>
+        </div>
+        <div className="graphs-wrapper">
+          <img src={GrantRatesByNationalityImg} />
+          <div className="caption">Search Grant Rates By Nationality</div>
+        </div>
+        <div className="graphs-wrapper">
+          <img src={GrantRatesOverTimeImg} />
+          <div className="caption">Search Grant Rates Over Time</div>
+        </div>
       </div>
 
       <div className="view-more-data-btn-container">
@@ -78,7 +82,17 @@ function RenderLandingPage(props) {
       </div>
       <div>
         {/* Bottom Section: Add code here for the graphs section for your first ticket */}
-        {/* <div className="bottom-section">*/}
+        <div className="bottom-section">
+          <div className="Bigger-text-container">
+            Systemic Disparity Highlights
+          </div>
+          <div className="Percentages-container">
+            <p>36%</p>
+            <p>5%</p>
+            <p>6x Lower</p>
+          </div>
+          <div className="Description-container"></div>
+        </div>
         <p onClick={() => scrollToTop()} className="back-to-top">
           Back To Top ^
         </p>
