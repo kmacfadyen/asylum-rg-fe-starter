@@ -76,7 +76,7 @@ function RenderLandingPage(props) {
             through a Freedom of Information Act request. You can search for
             information on asylum grant rates by year, nationality, and asylum
             office, visualize the data with charts and heat maps, and download
-            the data set
+            the data set.
           </h3>
         </div>
       </div>
@@ -84,14 +84,38 @@ function RenderLandingPage(props) {
         {/* Bottom Section: Add code here for the graphs section for your first ticket */}
         <div className="bottom-section">
           <div className="Bigger-text-container">
-            Systemic Disparity Highlights
+            Systemic Disparity Insights
           </div>
-          <div className="Percentages-container">
-            <p>36%</p>
-            <p>5%</p>
-            <p>6x Lower</p>
+          <div className="Percentage-container">
+            <div className="Percentage-item">36%</div>
+            <div className="Percentage-item">5%</div>
+            <div className="Percentage-item">6x Lower</div>
+            {/* <div className="Description-container"> */}
+            <div className="Description-item">
+              By the end of the Trump administration, the average asylum office
+              grant rate had fallen 36 percent from an average of 44 percent in
+              fiscal year 2016 to 28 percent in fiscal year 2020.
+            </div>
+            <div className="Description-item">
+              The New York asylum office grant rate dropped to 5 percent in
+              fiscal year 2020.
+            </div>
+            <div className="Description-item">
+              Between fiscal year 2017 and 2020, the New York asylum office's
+              average grant rate was six times lower than the San Francisco
+              asylum office.
+            </div>
           </div>
-          <div className="Description-container"></div>
+          {/* </div> */}
+        </div>
+        <div className="read-more-button-container">
+          <Button
+            type="default"
+            style={{ backgroundColor: '#404C4A', color: '#FFFFFF' }}
+            onClick={() => history.push('/graphs')}
+          >
+            Read More
+          </Button>
         </div>
         <p onClick={() => scrollToTop()} className="back-to-top">
           Back To Top ^
