@@ -31,7 +31,15 @@ function RenderLandingPage(props) {
         </div>
       </div>
 
-      {/* Graphs Section: Add code here for the graphs section for your first ticket */}
+      {/* Graphs Section: Add code here for the graphs section for your first ticket 
+
+        - Created a graphs section to correspond to the same section of the webpage
+        - Created a className called "graphs-wrapper" so that we can wrap individual sections and manipulate them with CSS more efficiently
+        - Captions have their own classNames as well!
+        - Images are imported and inserted into our graphs section
+        -  
+
+      */}
       <div className="graphs-section">
         <div className="graphs-wrapper">
           <img src={GrantRatesByOfficeImg} />
@@ -46,6 +54,14 @@ function RenderLandingPage(props) {
           <div className="caption">Search Grant Rates Over Time</div>
         </div>
       </div>
+
+      {/*  Button Section
+
+        - Created a new button to download data
+        - Copied styles used for "View the Data" button to be consistent
+        - onClick action will be updated in next ticket
+       
+       */}
 
       <div className="view-more-data-btn-container">
         <Button
@@ -81,7 +97,13 @@ function RenderLandingPage(props) {
         </div>
       </div>
       <div>
-        {/* Bottom Section: Add code here for the graphs section for your first ticket */}
+        {/* Bottom Section: Add code here for the graphs section for your first ticket 
+        
+          - Created separate containers to manage CSS more effectively
+          - "Percentage-container" contains both percentage and description items
+          - All info is static to match landing page screenshot
+
+        */}
         <div className="bottom-section">
           <div className="Bigger-text-container">
             Systemic Disparity Insights
@@ -90,7 +112,6 @@ function RenderLandingPage(props) {
             <div className="Percentage-item">36%</div>
             <div className="Percentage-item">5%</div>
             <div className="Percentage-item">6x Lower</div>
-            {/* <div className="Description-container"> */}
             <div className="Description-item">
               By the end of the Trump administration, the average asylum office
               grant rate had fallen 36 percent from an average of 44 percent in
@@ -106,7 +127,6 @@ function RenderLandingPage(props) {
               asylum office.
             </div>
           </div>
-          {/* </div> */}
         </div>
         <div className="read-more-button-container">
           <Button
