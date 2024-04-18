@@ -14,6 +14,8 @@ import test_data from '../../../data/test_data.json';
 import { colors } from '../../../styles/data_vis_colors';
 import ScrollToTopOnMount from '../../../utils/scrollToTopOnMount';
 
+const REACT_APP_API_URI = `https://hrf-asylum-be-b.herokuapp.com/cases`;
+
 const { background_color } = colors;
 
 function GraphWrapper(props) {
@@ -50,60 +52,115 @@ function GraphWrapper(props) {
         break;
     }
   }
-  function updateStateWithNewData(years, view, office, stateSettingCallback) {
+  async function updateStateWithNewData(
+    years,
+    view,
+    office,
+    stateSettingCallback
+  ) {
     /*
-          _                                                                             _
-        |                                                                                 |
-        |   Example request for once the `/summary` endpoint is up and running:           |
-        |                                                                                 |
-        |     `${url}/summary?to=2022&from=2015&office=ZLA`                               |
-        |                                                                                 |
-        |     so in axios we will say:                                                    |
-        |                                                                                 |     
-        |       axios.get(`${url}/summary`, {                                             |
-        |         params: {                                                               |
-        |           from: <year_start>,                                                   |
+                  _                                                                             _
+                  |                                                                                 |
+                  |   Example request for once the `/summary` endpoint is up and running:           |
+                  |                                                                                 |
+                  |     `${url}/summary?to=2022&from=2015&office=ZLA`                               |
+                  |                                                                                 |
+                  |     so in axios we will say:                                                    |
+                  |                                                                                 |     
+                  |       axios.get(`${url}/summary`, {                                             |
+                    |         params: {                                                               |
+                      |           from: <year_start>,                                                   |
         |           to: <year_end>,                                                       |
         |           office: <office>,       [ <-- this one is optional! when    ]         |
         |         },                        [ querying by `all offices` there's ]         |
         |       })                          [ no `office` param in the query    ]         |
         |                                                                                 |
           _                                                                             _
-                                   -- Mack 
-    
-    */
+          -- Mack 
+          
+          */
+
+    // let apiUrl;
+
+    // if (office === 'all' || !office) {
+
+    //   apiUrl = `${process.env.REACT_APP_API_URI}/fiscalSummary`;
+    // }
+    // else {
+    //   apiUrl = `${process.env.REACT_APP_API_URI}/citizenshipSummary`;
+    // }
+
+    console.log('API URL:', REACT_APP_API_URI);
+    // console.log('apiURL:', apiUrl);
 
     if (office === 'all' || !office) {
-      axios
-        .get(process.env.REACT_APP_API_URI, {
+      const fiscal = await axios.get(`${REACT_APP_API_URI}/fiscalSummary`, {
+        // .get(apiUrl, {
+
+        // mock URL, can be simply replaced by `${Real_Production_URL}/summary` in prod!
+        params: {
+          from: years[0],
+          to: years[1],
+          // ...(office && { office }),
+        },
+      });
+      const citizenship = await axios.get(
+        `${REACT_APP_API_URI}/citizenshipSummary`,
+        {
+          // .get(apiUrl, {
+
           // mock URL, can be simply replaced by `${Real_Production_URL}/summary` in prod!
           params: {
             from: years[0],
             to: years[1],
+            // ...(office && { office }),
           },
-        })
-        .then(result => {
-          stateSettingCallback(view, office, test_data); // <-- `test_data` here can be simply replaced by `result.data` in prod!
-        })
-        .catch(err => {
-          console.error(err);
-        });
+        }
+      );
+
+      fiscal['citizenshipResults'] = citizenship.data;
+      stateSettingCallback(view, office, [fiscal.data]);
+
+      // .then(result => {
+      //   stateSettingCallback(view, office, result.data); // <-- `test_data` here can be simply replaced by `result.data` in prod!
+      //   console.log("result data: ", result.data);
+
+      // })
+      // .catch(err => {
+      //   console.error(err);
+      //   console.log("test data: ", test_data);
+      // });
     } else {
-      axios
-        .get(process.env.REACT_APP_API_URI, {
+      const fiscal = await axios.get(`${REACT_APP_API_URI}/fiscalSummary`, {
+        // mock URL, can be simply replaced by `${Real_Production_URL}/summary` in prod!
+        params: {
+          from: years[0],
+          to: years[1],
+          office: office,
+        },
+      });
+
+      const citizenship = await axios.get(
+        `${REACT_APP_API_URI}/citizenshipSummary`,
+        {
           // mock URL, can be simply replaced by `${Real_Production_URL}/summary` in prod!
           params: {
             from: years[0],
             to: years[1],
             office: office,
           },
-        })
-        .then(result => {
-          stateSettingCallback(view, office, test_data); // <-- `test_data` here can be simply replaced by `result.data` in prod!
-        })
-        .catch(err => {
-          console.error(err);
-        });
+        }
+      );
+
+      fiscal['citizenshipResults'] = citizenship.data;
+      stateSettingCallback(view, office, [fiscal.data]);
+
+      // .then(result => {
+      //   stateSettingCallback(view, office, test_data); // <-- `test_data` here can be simply replaced by `result.data` in prod!
+      // })
+      // .catch(err => {
+      //   console.error(err);
+      // });
     }
   }
   const clearQuery = (view, office) => {
