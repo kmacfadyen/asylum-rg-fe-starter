@@ -80,56 +80,46 @@ function GraphWrapper(props) {
           
           */
 
-    // let apiUrl;
-
-    // if (office === 'all' || !office) {
-
-    //   apiUrl = `${process.env.REACT_APP_API_URI}/fiscalSummary`;
-    // }
-    // else {
-    //   apiUrl = `${process.env.REACT_APP_API_URI}/citizenshipSummary`;
-    // }
-
     console.log('API URL:', REACT_APP_API_URI);
-    // console.log('apiURL:', apiUrl);
 
     if (office === 'all' || !office) {
       const fiscal = await axios.get(`${REACT_APP_API_URI}/fiscalSummary`, {
-        // .get(apiUrl, {
+        /**
+         * I used an asynchronous axios call instead of a synchronous one. Since it is
+         * asynchronous, the UI does not freeze, and other parts of our application can
+         * still run while waiting on the call.
+         */
 
         // mock URL, can be simply replaced by `${Real_Production_URL}/summary` in prod!
         params: {
           from: years[0],
           to: years[1],
-          // ...(office && { office }),
         },
       });
       const citizenship = await axios.get(
         `${REACT_APP_API_URI}/citizenshipSummary`,
         {
-          // .get(apiUrl, {
-
           // mock URL, can be simply replaced by `${Real_Production_URL}/summary` in prod!
           params: {
             from: years[0],
             to: years[1],
-            // ...(office && { office }),
+            ...(office && { office }),
           },
         }
       );
 
       fiscal['citizenshipResults'] = citizenship.data;
+      /**
+       * Here we are assigning citizenship data to the 'citizenshipResults property
+       * on the fiscal object
+       */
+
       stateSettingCallback(view, office, [fiscal.data]);
 
-      // .then(result => {
-      //   stateSettingCallback(view, office, result.data); // <-- `test_data` here can be simply replaced by `result.data` in prod!
-      //   console.log("result data: ", result.data);
-
-      // })
-      // .catch(err => {
-      //   console.error(err);
-      //   console.log("test data: ", test_data);
-      // });
+      /**
+       * Instead of using "then", I manually call the stateSettingCallback function
+       * with view, office, and the new fiscal data
+       */
     } else {
       const fiscal = await axios.get(`${REACT_APP_API_URI}/fiscalSummary`, {
         // mock URL, can be simply replaced by `${Real_Production_URL}/summary` in prod!
@@ -154,13 +144,9 @@ function GraphWrapper(props) {
 
       fiscal['citizenshipResults'] = citizenship.data;
       stateSettingCallback(view, office, [fiscal.data]);
-
-      // .then(result => {
-      //   stateSettingCallback(view, office, test_data); // <-- `test_data` here can be simply replaced by `result.data` in prod!
-      // })
-      // .catch(err => {
-      //   console.error(err);
-      // });
+      /**
+       * These are identical to to assignment and callback from above for consistency
+       */
     }
   }
   const clearQuery = (view, office) => {
@@ -200,5 +186,32 @@ function GraphWrapper(props) {
     </div>
   );
 }
+
+//   .then(result => {
+//   stateSettingCallback(view, office, result.data); // <-- `test_data` here can be simply replaced by `result.data` in prod!
+//   console.log("result data: ", result.data);
+
+// })
+// .catch(err => {
+//   console.error(err);
+//   console.log("test data: ", test_data);
+// });
+
+// .then(result => {
+//   stateSettingCallback(view, office, test_data); // <-- `test_data` here can be simply replaced by `result.data` in prod!
+// })
+// .catch(err => {
+//   console.error(err);
+// });
+
+// let apiUrl;
+
+// if (office === 'all' || !office) {
+
+//   apiUrl = `${process.env.REACT_APP_API_URI}/fiscalSummary`;
+// }
+// else {
+//   apiUrl = `${process.env.REACT_APP_API_URI}/citizenshipSummary`;
+// }
 
 export default connect()(GraphWrapper);
