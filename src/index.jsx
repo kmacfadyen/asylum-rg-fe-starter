@@ -23,15 +23,21 @@ import { configureStore } from '@reduxjs/toolkit';
 import reducer from './state/reducers';
 import { colors } from './styles/data_vis_colors';
 
+import Auth0ProviderWithHistory from './auth/auth0-provider-with-history';
+
 const { primary_accent_color } = colors;
 
 const store = configureStore({ reducer: reducer });
 ReactDOM.render(
   <Router>
     <Provider store={store}>
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
+      <Auth0ProviderWithHistory>
+        {' '}
+        {/* Wrap the App component with Auth0ProviderWithHistory */}
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
+      </Auth0ProviderWithHistory>
     </Provider>
   </Router>,
   document.getElementById('root')
