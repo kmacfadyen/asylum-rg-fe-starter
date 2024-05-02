@@ -11,7 +11,7 @@ import 'antd/dist/antd.less';
 import { NotFoundPage } from './components/pages/NotFound';
 import { LandingPage } from './components/pages/Landing';
 
-import { ProfilePage } from './components/ProfilePage';
+import ProfilePage from './components/ProfilePage';
 
 import { FooterContent, SubFooter } from './components/Layout/Footer';
 import { HeaderContent } from './components/Layout/Header';
@@ -61,7 +61,7 @@ export function App() {
       </Header>
       <Switch>
         <Route path="/" exact component={LandingPage} />
-        {/* <Route path="/profile" component={ProfilePage} /> */}
+        <Route path="/profile" component={ProfilePage} />
         <Route path="/graphs" component={GraphsContainer} />
         <Route component={NotFoundPage} />
       </Switch>
