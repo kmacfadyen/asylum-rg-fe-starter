@@ -1,6 +1,7 @@
 // src/components/ProfilePage.js
 
 import React from 'react';
+import LogoutButton from './logout-button';
 
 import { useAuth0, withAuthenticationRequired } from '@auth0/auth0-react';
 // import { Loading } from '../components/';
@@ -80,6 +81,11 @@ const ProfilePage = () => {
         <pre className="col-12 text-light bg-dark p-4">
           {JSON.stringify(user, null, 2)}
         </pre>
+      </div>
+      <div className="row justify-content-center mt-4">
+        <div className="col-md-6">
+          <LogoutButton /> {/* Render the LogoutButton component */}
+        </div>
       </div>
     </div>
   );
