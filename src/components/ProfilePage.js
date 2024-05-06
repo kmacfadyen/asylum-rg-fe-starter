@@ -51,13 +51,13 @@ import { useAuth0, withAuthenticationRequired } from '@auth0/auth0-react';
 const ProfilePage = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
 
-  if (isLoading) {
-    return <div>Loading...</div>; // Optional loading indicator
-  }
+  //   if (isLoading) {
+  //     return <div>Loading...</div>; // Optional loading indicator
+  //   }
 
-  if (!isAuthenticated) {
-    return <div>Please log in to view this page.</div>; // Optional authentication check
-  }
+  //   if (!isAuthenticated) {
+  //     return <div>Please log in to view this page.</div>; // Optional authentication check
+  //   }
 
   const { name, picture, email } = user;
 
