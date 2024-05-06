@@ -13,6 +13,8 @@ import { LandingPage } from './components/pages/Landing';
 
 import ProfilePage from './components/ProfilePage';
 
+import LoginButton from './components/login-button';
+
 import { FooterContent, SubFooter } from './components/Layout/Footer';
 import { HeaderContent } from './components/Layout/Header';
 
@@ -61,8 +63,10 @@ export function App() {
       </Header>
       <Switch>
         <Route path="/" exact component={LandingPage} />
-        <Route path="/profile" component={ProfilePage} />
         <Route path="/graphs" component={GraphsContainer} />
+        <Route path="/login" component={LoginButton} />{' '}
+        {/* Route for LoginButton */}
+        <Route path="/profile" component={ProfilePage} />
         <Route component={NotFoundPage} />
       </Switch>
       <Footer

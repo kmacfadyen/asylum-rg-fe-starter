@@ -28,7 +28,7 @@ function HeaderContent() {
         <Link to="/graphs" style={{ color: '#E2F0F7', paddingRight: '75px' }}>
           Graphs
         </Link>
-        <Link to="/profile" style={{ color: '#E2F0F7' }}>
+        <Link to="/login" style={{ color: '#E2F0F7' }}>
           Login
         </Link>
       </div>
