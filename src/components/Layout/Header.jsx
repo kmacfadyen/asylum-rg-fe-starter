@@ -38,6 +38,8 @@ function HeaderContent() {
         ) : (
           <LoginButton />
         )}
+        {/* We check if the user is logged in, and then determine whether or not
+        to render the login or logout button */}
       </div>
     </div>
   );
