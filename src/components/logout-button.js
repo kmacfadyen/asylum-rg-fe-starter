@@ -8,11 +8,18 @@ import { useHistory } from 'react-router-dom';
 const LogoutButton = () => {
   const { logout } = useAuth0();
   const history = useHistory();
+  const { isAuthenticated } = useAuth0();
 
   const handleLogout = () => {
     logout({ returnTo: window.location.origin });
     history.push('/'); // Redirect to the home page after logout
   };
+
+  React.useEffect(() => {
+    if (isAuthenticated) {
+      history.push('/profile');
+    }
+  }, [isAuthenticated, history]);
 
   return (
     <button className="btn btn-danger" onClick={handleLogout}>

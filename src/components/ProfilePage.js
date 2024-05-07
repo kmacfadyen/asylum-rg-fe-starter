@@ -84,7 +84,7 @@ const ProfilePage = () => {
       </div>
       <div className="row justify-content-center mt-4">
         <div className="col-md-6">
-          <LogoutButton /> {/* Render the LogoutButton component */}
+          {/* <LogoutButton /> Render the LogoutButton component */}
         </div>
       </div>
     </div>
